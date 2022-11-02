@@ -68,28 +68,6 @@ header {
   margin-left: 80px;
 }
 
-.children {
-  margin-top: 200px;
-  padding-left: 25px;
-  z-index: 0;
-}
-.children .child {
-  opacity: 0;
-  pointer-events: none;
-  animation: animate 15s linear infinite;
-  animation-delay: calc(3s * var(--delay));
-  position: absolute;
-}
-.child {
-  border: 2.5px solid #333399;
-  border-radius: 70px;
-  height: 100px;
-  display: flex;
-  flex-direction: row;
-  background: #fff;
-  margin-bottom: 20px;
-  width: 35%;
-}
 .child-title {
   padding: 20px 10px 10px 20px;
   font-size: 20px;
@@ -125,34 +103,51 @@ header {
   font-size: 26px;
   background: #fff;
 }
-.children .child:last-child {
+/* .children .child:last-child {
   animation-delay: calc(-3s * var(--delay));
+} */
+
+.children {
+  padding-left: 25px;
+  z-index: 0;
+  height: 700px;
+}
+.inner {
+  overflow: hidden;
+  position: relative;
+  margin-top: 100px;
+  height: max-content;
+}
+
+.child {
+  border: 2.5px solid #333399;
+  /* animation-delay: 3s; */
+  border-radius: 70px;
+  height: 100px;
+  display: flex;
+  flex-direction: row;
+  background: #fff;
+  margin-bottom: 20px;
+  width: 90%;
+  animation-name: animate;
+  animation-duration: var(--animation-duration);
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  flex-shrink: 0;
+  white-space: nowrap;
+  display: flex;
+  list-style: none;
+}
+:root {
+  --number: 0;
+  --animation-duration: 0s;
 }
 
 @keyframes animate {
-  0% {
-    opacity: 0;
-    transform: translateY(100%) scale(0.1);
+  from {
+    transform: translateY(calc(-120px * (var(--number) * 1.2)));
   }
-  5%,
-  20% {
-    opacity: 1;
-    transform: translateY(100%) scale(0.7);
-  }
-  25%,
-  40% {
-    opacity: 1;
-    pointer-events: auto;
-    transform: translateY(0%) scale(1);
-  }
-  45%,
-  60% {
-    opacity: 1;
-    transform: translateY(-100%) scale(0.7);
-  }
-  65%,
-  100% {
-    opacity: 0;
-    transform: translateY(-100%) scale(0.1);
+  to {
+    transform: translateY(700px);
   }
 }
