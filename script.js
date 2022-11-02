@@ -49,11 +49,6 @@ function emptyBlockSet() {
 i = 0;
 async function delay() {
   let students = allStudents.filter((student) => student.rank == rankList[i]);
-  console.log(allStudents);
-  // if (students.length == 0) {
-  //   i++;
-  //   delay();
-  // }
   number.style.setProperty("--number", students.length);
   number.style.setProperty(
     "--animation-duration",
@@ -72,6 +67,13 @@ async function delay() {
     },
     students.length < 6 ? 18500 : students.length * 3000
   );
+  if (
+    allStudents.filter((student) => student.rank == rankList[i + 1]).length ==
+      0 &&
+    i < 6
+  ) {
+    i += 2;
+  }
 }
 
 function displayData(students, rank) {
