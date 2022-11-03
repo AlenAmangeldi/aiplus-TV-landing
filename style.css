@@ -5,7 +5,7 @@ html {
 header {
   /*margin-top: 53px;
 	margin-left: 50px;*/
-  padding: 43px 40px 0 40px;
+  padding: 43px 30px 0 30px;
 }
 
 .header-time {
@@ -102,6 +102,7 @@ header {
   font-weight: 600;
   font-size: 26px;
   background: #fff;
+  width: 550px;
 }
 /* .children .child:last-child {
   animation-delay: calc(-3s * var(--delay));
@@ -124,7 +125,6 @@ header {
   /* animation-delay: 3s; */
   border-radius: 70px;
   height: 100px;
-  display: flex;
   flex-direction: row;
   background: #fff;
   margin-bottom: 20px;
@@ -137,15 +137,47 @@ header {
   white-space: nowrap;
   display: flex;
   list-style: none;
+  box-shadow: 2px 3px 2px rgb(156, 156, 156);
 }
 :root {
-  --number: 0;
+  --number-of-ranks: 0;
   --animation-duration: 0s;
+}
+.week-stars-elements {
+  margin-top: 100px;
+}
+.kids {
+  display: flex;
+  border: 2.5px solid #f7a808;
+  border-radius: 70px;
+  height: 100px;
+  background: #fff;
+  margin-bottom: 20px;
+  max-width: 90%;
+  box-shadow: 2px 3px 2px rgb(156, 156, 156);
+}
+.achievements {
+  margin-top: 40px;
+  margin-left: 20px;
+  margin: 40px 30px 0px 40px;
+}
+.rank-img img {
+  height: 85px;
+  width: 85px;
 }
 
 @keyframes animate {
   from {
-    transform: translateY(calc(-120px * (var(--number) * 1.2)));
+    transform: translateY(calc(-120px * (var(--number-of-ranks) * 1.2)));
+  }
+  to {
+    transform: translateY(700px);
+  }
+}
+
+@keyframes scroll {
+  from {
+    transform: translateY(calc(-120px * (var(--number-of-achivments) * 1.2)));
   }
   to {
     transform: translateY(700px);

@@ -3,6 +3,7 @@ const newRanksHeader = document.getElementById("new-ranks-icon");
 const date = document.getElementById("date");
 const emptyBlock = document.getElementById("empty");
 const number = document.querySelector(":root");
+const dateTimeBlock = document.getElementById("date");
 
 const rankList = [
   "Мастер (Master)",
@@ -15,6 +16,19 @@ const rankList = [
   "Легенда III (Legend III)",
 ];
 let allStudents = [];
+let achivementStudents = [];
+
+function dateTime() {
+  setInterval(() => {
+    let date = new Date();
+    let time = date.getHours() + ":" + date.getMinutes();
+    dateTimeBlock.innerHTML = `${time} ${date.getDate()}.${
+      date.getMonth() + 1
+    }.${date.getFullYear()}`;
+  }, 1000);
+}
+
+dateTime();
 
 async function getData() {
   for (let i = 0; i < 7; i++) {
@@ -37,6 +51,9 @@ async function getData() {
           allStudents.push({ ...student, rank: studentRank });
         })
       );
+    // await fetch(
+    //   `https://aiplus.t8s.ru//Api/V2/GetStudents?Statuses=Занимается,Регистрация&authkey=VdqvXSXu%2Fq1DWiLefLBUihGMn7MHlvSP59HIHoHH7%2BLEtHB5dtznB6sqyJIPjH5w&extraFieldName=Дата+получения+ачивки&extraFieldValue=${ISODate}`
+    // ).then((response)=> response.json()).then((data)=> );
   }
   delay();
 }
@@ -49,7 +66,7 @@ function emptyBlockSet() {
 i = 0;
 async function delay() {
   let students = allStudents.filter((student) => student.rank == rankList[i]);
-  number.style.setProperty("--number", students.length);
+  number.style.setProperty("--number-of-ranks", students.length);
   number.style.setProperty(
     "--animation-duration",
     students.length < 6 ? "18s" : students.length * 3 + "s"
