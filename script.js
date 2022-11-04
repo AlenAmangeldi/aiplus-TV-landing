@@ -4,6 +4,7 @@ const date = document.getElementById("date");
 const emptyBlock = document.getElementById("empty");
 const number = document.querySelector(":root");
 const dateTimeBlock = document.getElementById("date");
+const newAchivementsBlock = document.getElementById("newAchivements");
 
 const rankList = [
   "Мастер (Master)",
@@ -16,12 +17,16 @@ const rankList = [
   "Легенда III (Legend III)",
 ];
 let allStudents = [];
-let achivementStudents = [];
+let achievementStudents = [];
 
 function dateTime() {
   setInterval(() => {
     let date = new Date();
-    let time = date.getHours() + ":" + date.getMinutes();
+    let time =
+      date.getHours() +
+      ":" +
+      (date.getMinutes() < 10 ? "0" : "") +
+      date.getMinutes();
     dateTimeBlock.innerHTML = `${time} ${date.getDate()}.${
       date.getMonth() + 1
     }.${date.getFullYear()}`;
@@ -51,10 +56,28 @@ async function getData() {
           allStudents.push({ ...student, rank: studentRank });
         })
       );
-    // await fetch(
-    //   `https://aiplus.t8s.ru//Api/V2/GetStudents?Statuses=Занимается,Регистрация&authkey=VdqvXSXu%2Fq1DWiLefLBUihGMn7MHlvSP59HIHoHH7%2BLEtHB5dtznB6sqyJIPjH5w&extraFieldName=Дата+получения+ачивки&extraFieldValue=${ISODate}`
-    // ).then((response)=> response.json()).then((data)=> );
+    await fetch(
+      `https://aiplus.t8s.ru//Api/V2/GetStudents?Statuses=Занимается,Регистрация&authkey=VdqvXSXu%2Fq1DWiLefLBUihGMn7MHlvSP59HIHoHH7%2BLEtHB5dtznB6sqyJIPjH5w&extraFieldName=Дата+получения+ачивки&extraFieldValue=${ISODate}`
+    )
+      .then((response) => response.json())
+      .then((data) =>
+        data.Students.forEach((student) => {
+          console.log(student);
+          const studentRank = student.ExtraFields.find(
+            (el) => el.Name == "Рейтинг"
+          ).Value;
+          const studentAchievement = student.ExtraFields.find(
+            (el) => el.Name == "Ачивка"
+          ).Value;
+          achievementStudents.push({
+            ...student,
+            rank: studentRank,
+            achievement: studentAchievement,
+          });
+        })
+      );
   }
+  displayNewAchivements(achievementStudents);
   delay();
 }
 getData();
@@ -128,3 +151,42 @@ function displayData(students, rank) {
   childClass.style["animation-duration"] = "10s";
   newRanksChildren.innerHTML = html;
 }
+
+function displayNewAchivements(achievementStudents) {
+  let html = "";
+  number.style.setProperty(
+    "--number-of-achievement",
+    achievementStudents.length
+  );
+  number.style.setProperty(
+    "--scroll-duration",
+    achievementStudents.length < 6
+      ? "18s"
+      : achievementStudents.length * 3 + "s"
+  );
+  if (achievementStudents) {
+    achievementStudents.forEach((student) => {
+      html += `
+          <div class="kids">
+          <div class="achive-child-img">
+            <img src="./assets/${student.achievement}.svg" />
+          </div>
+          <div class="achive-child-title">
+            ${student.FirstName} ${student.LastName}
+            <div class="achive-title-subtitle">
+              <div class="achive-child-subtitle left">
+              ${student.rank}
+                <p>Ранг</p>
+              </div>
+              <div class="achive-child-subtitle right">
+                ${student.achievement}
+                <p>Ачивка</p>
+              </div>
+            </div>
+          </div>
+        </div>`;
+    });
+  }
+  newAchivementsBlock.innerHTML = html;
+}
+displayNewAchivements(achievementStudents);

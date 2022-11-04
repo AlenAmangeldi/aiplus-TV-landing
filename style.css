@@ -3,8 +3,6 @@ html {
   background-image: url("assets/background.svg");
 }
 header {
-  /*margin-top: 53px;
-	margin-left: 50px;*/
   padding: 43px 30px 0 30px;
 }
 
@@ -32,14 +30,15 @@ header {
 }
 
 .separator {
-  border: 2px dashed #f7a808;
+  border: 3px dashed #f7a808;
   border-radius: 2px;
   height: 900px;
-  margin: 0px 35px 0px 45px;
+  margin: 0px 45px 0px 45px;
 }
 .new-ranks-icon {
   display: flex;
   flex-direction: column;
+  margin-top: 10px;
 }
 .new-ranks-icon img {
   width: 145px;
@@ -48,7 +47,7 @@ header {
   position: absolute;
 }
 .new-ranks-title {
-  margin-top: 25px;
+  margin-top: 35px;
   margin-left: 50px;
   border: 2.5px solid #333399;
   border-radius: 10px;
@@ -102,73 +101,114 @@ header {
   font-weight: 600;
   font-size: 26px;
   background: #fff;
-  width: 550px;
+  width: 650px;
 }
-/* .children .child:last-child {
-  animation-delay: calc(-3s * var(--delay));
-} */
 
-.children {
-  padding-left: 25px;
-  z-index: 0;
-  height: 700px;
-}
 .inner {
   overflow: hidden;
   position: relative;
   margin-top: 100px;
   height: max-content;
 }
+.children {
+  padding-left: 25px;
+  z-index: 0;
+  height: 700px;
+}
 
 .child {
+  display: flex;
   border: 2.5px solid #333399;
-  /* animation-delay: 3s; */
   border-radius: 70px;
   height: 100px;
-  flex-direction: row;
   background: #fff;
   margin-bottom: 20px;
   width: 90%;
+  box-shadow: 2px 3px 2px rgb(156, 156, 156);
   animation-name: animate;
   animation-duration: var(--animation-duration);
   animation-timing-function: linear;
   animation-iteration-count: infinite;
-  flex-shrink: 0;
-  white-space: nowrap;
-  display: flex;
-  list-style: none;
-  box-shadow: 2px 3px 2px rgb(156, 156, 156);
 }
 :root {
   --number-of-ranks: 0;
   --animation-duration: 0s;
+  --scroll-duration: 0s;
+  --number-of-achievement: 0;
 }
-.week-stars-elements {
-  margin-top: 100px;
-}
+
 .kids {
   display: flex;
-  border: 2.5px solid #f7a808;
+  border: 3px solid #f7a808;
   border-radius: 70px;
-  height: 100px;
+  height: 125px;
   background: #fff;
   margin-bottom: 20px;
   max-width: 90%;
   box-shadow: 2px 3px 2px rgb(156, 156, 156);
+  animation-name: scroll;
+  animation-duration: var(--scroll-duration);
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.rank-img img {
+  height: 85px;
+  width: 85px;
+}
+.achive-child-img img {
+  height: 126px;
+  width: 126px;
+}
+.achive-child-title {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 26px;
+  color: #f7a808;
+  padding: 20px 10px 10px 20px;
+  /* font-size: 25px;
+  font-weight: 500; */
+}
+.achive-child-subtitle {
+  font-size: 18px;
+  font-weight: 500;
+  margin: 5px 35px 0px 0px;
+  color: black;
+  display: flex;
+  flex-direction: column;
+}
+.achive-child-subtitle p {
+  font-weight: 400;
+  font-size: 16px;
+  margin: 4px 0px;
+}
+
+.achive-title-subtitle {
+  display: flex;
+  flex-direction: row;
+}
+
+.week-stars-elements {
+  padding-left: 25px;
+  z-index: 0;
+  height: 700px;
+}
+
+.week-stars-inner {
+  overflow: hidden;
+  position: relative;
+  margin-top: 100px;
+  height: max-content;
 }
 .achievements {
   margin-top: 40px;
   margin-left: 20px;
   margin: 40px 30px 0px 40px;
 }
-.rank-img img {
-  height: 85px;
-  width: 85px;
-}
 
 @keyframes animate {
   from {
-    transform: translateY(calc(-120px * (var(--number-of-ranks) * 1.2)));
+    transform: translateY(calc(-105px * (var(--number-of-ranks) * 1.2)));
   }
   to {
     transform: translateY(700px);
@@ -177,7 +217,7 @@ header {
 
 @keyframes scroll {
   from {
-    transform: translateY(calc(-120px * (var(--number-of-achivments) * 1.2)));
+    transform: translateY(calc(-120px * (var(--number-of-achievement) * 1.2)));
   }
   to {
     transform: translateY(700px);
